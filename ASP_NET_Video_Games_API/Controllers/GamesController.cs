@@ -15,7 +15,7 @@ namespace ASP_NET_Video_Games_API.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet("{pubName}")]
         public IActionResult GetPublishers()
         {
             //var videoGamePublishers = _context.VideoGames.Select(vg => vg.Publisher).Distinct();
@@ -24,6 +24,14 @@ namespace ASP_NET_Video_Games_API.Controllers
             Console.WriteLine("Endpoint hit");
             var games = _context.VideoGames;
             return Ok(games);
+        }
+
+        [HttpGet]
+
+        public IActionResult GetGamesByPublisher(string pubName)
+        {
+            var videoGames = _context.VideoGames.Where(vg => vg.Publisher == pubName);
+            return Ok(videoGames);
         }
             
     }
